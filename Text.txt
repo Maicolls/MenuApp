@@ -1,0 +1,20 @@
+Instalaciones que requiere el aplicativo para su funcionamiento
+###############################################################
+se usa la libreria de react navigation los siguientes paquetes:
+* npm install @react-navigation/native
+*npm install react-native-screens react-native-safe-area-context
+*npm install @react-navigation/drawer 
+*npm install react-native-gesture-handler react-native-reanimated
+npm install react-native-vector-icons la siguiente opcion puede servir de igualmanera para los iconos
+react-native link react-native-vector-icons
+#################################################################
+Las  siguientes Instalaciones salen de React native reanimated
+*npm install react-native-reanimated
+se bede editar el archivo babel.config.js
+plugins: [ 'react-native-reanimated/plugin'], ((Creo que con lo que has hecho ya esta arreglado))
+*npm start -- --reset-cache
+#################################################################
+Importe como prueba en ambos archivos como index.js y App,tsx la siguiente line ade codigo 
+import 'react-native-gesture-handler';
+por si se es necesario se debe realizar esta importacion 
+npm install @react-navigation/stack

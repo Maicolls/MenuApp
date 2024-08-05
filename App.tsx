@@ -1,118 +1,72 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import HomeScreen from './src/Screens/HomeScreen';
+import ProfileScreen from './src/Screens/ProfileScreenScreen';
+import MessageScreen from './src/Screens/MessageScreen';
+import MomentsScreen from './src/Screens/MomentsScreen';
+import SettingsScreens from './src/Screens/SettingsScreen';
+import CustomDrawer from './src/Components/CustomDrawer';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const Drawer = createDrawerNavigator();
+
+const App = () => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator  
+      drawerContent={props => <CustomDrawer {...props}/>} 
+      screenOptions={{
+      headerShown: false,
+      drawerActiveBackgroundColor: '#aa18ea', 
+      drawerActiveTintColor: '#fff',
+      drawerInactiveTintColor: '#333',
+      drawerLabelStyle: {
+        marginLeft:-25,
+        fontFamily: 'Roboto-Medium',
+        fontSize: 15
+      }}}>
+        <Drawer.Screen name="Home" component={HomeScreen} 
+        options={{
+          drawerIcon: ({color}) =>(
+            <Ionicons name="home" size={24} color="color" />
+          )
+        }}
+        />
+        <Drawer.Screen name="Perfil" component={ProfileScreen} 
+        options={{
+          drawerIcon: ({color}) =>(
+            <Ionicons name="person-outline" size={24} color="color" />
+          )
+        }}
+        />
+        <Drawer.Screen name="Calendario" component={MessageScreen} 
+        options={{
+          drawerIcon: ({color}) =>(
+            <Ionicons name="calendar-number-outline" size={24} color="color" />
+          )
+        }}
+        />
+        <Drawer.Screen name="Diario" component={MomentsScreen} 
+        options={{
+          drawerIcon: ({color}) =>(
+            <Ionicons name="reader-outline" size={24} color="color" />
+          )
+        }}
+        />
+        <Drawer.Screen name="Lineas Psicologicas" component={SettingsScreens} 
+        options={{
+          drawerIcon: ({color}) =>(
+            <Ionicons name="call-outline" size={24} color="color" />
+          )
+        }}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
